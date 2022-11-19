@@ -1,0 +1,43 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+%matplotlib inline
+from sklearn import preprocessing
+
+from google.colab import files
+uploaded=files.upload()
+
+baseMath=pd.read_excel("StudentPerformance.xlsx")
+
+print("Dimensões da base: ", baseMath.shape)
+
+print("Vizualizando: \n", baseMath.head(397))
+
+le=preprocessing.LabelEncoder()
+Pstatus=baseMath['Pstatus']
+pstatus=le.fit_transform(Pstatus)
+# t= vivendo juntos a=separados
+# 1 = vivendo juntos 0=separados
+
+TempoNota={'Tempo':baseMath['studytime'],'Nota':baseMath['GT'],'Saude':baseMath['health'], 'Pstatus':pstatus, 'Deslocamento':baseMath['traveltime']}
+df_TempoNota=pd.DataFrame(TempoNota)
+print(df_TempoNota)
+
+normalized_df_TempoNota=(df_TempoNota-df_TempoNota.min())/(df_TempoNota.max()-df_TempoNota.min())
+
+X=df_TempoNota[['Nota','Saude','Pstatus','Deslocamento']]
+y=df_TempoNota['Tempo']
+print(f'\n{X}\n{y}')
+
+from sklearn.model_selection import train_test_split
+X_train,X_test,y_train,y_test=train_test_split(X,y,test_size=0.3, random_state=95)
+
+from sklearn.linear_model import LinearRegression
+modPreditor=LinearRegression()
+
+modPreditor.fit(X_train,y_train)
+print(modPreditor)
+
+coeff=pd.DataFrame(modPreditor.coef_,X.columns,columns=['Coeficiente'])
+coeff
