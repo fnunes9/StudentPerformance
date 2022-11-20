@@ -8,4 +8,4 @@ health[saúde], GT [nota total].
 A base refere-se aos estudantes de duas escolas em Portugal e escolhi a linguagem Python para desenvolver os algoritmos.
 
 Saberei que concluí o projeto quando aplicar as ténicas de:
-Regressão Linear, Regressão logística, KNN, Árvore de decisão, Kmeans, Fuzzy e me arrico a tentar Redes Neurais.
+Regressão Linear, Regressão logística, KNN, Árvore de decisão, Kmeanse me arrico a tentar Redes Neurais.
